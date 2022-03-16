@@ -35,9 +35,17 @@ import java.util.Map;
 
 public class CustomerDetailPurchaseActivity extends AppCompatActivity {
 
+    /*
+        update change =
+        16Maret2022 : berubah dari menampilkan banyak detail transaksi menjadi hanya menampilkan SATU detail transaksi / satu barang detail
+
+     */
+
     protected ActivityCustomerDetailPurchaseBinding binding;
 
     int idHTrans = -1;
+
+    int idDTrans = -1;
 
     cHeaderPurchase htrans;
     ArrayList<cDetailPurchase> arrDTrans = new ArrayList<>();
@@ -55,6 +63,8 @@ public class CustomerDetailPurchaseActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         idHTrans = getIntent().getIntExtra("idHTrans", -1);
+
+        idDTrans = getIntent().getIntExtra("idDTrans", -1);
 
         if (idHTrans != -1){
             getTransData();
@@ -168,6 +178,7 @@ public class CustomerDetailPurchaseActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("function", "gettransdata");
                 params.put("idhtrans", idHTrans+"");
+                params.put("iddtrans", idDTrans+"");
 
                 return params;
             }

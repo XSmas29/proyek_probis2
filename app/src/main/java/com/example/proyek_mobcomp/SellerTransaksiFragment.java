@@ -85,9 +85,6 @@ public class SellerTransaksiFragment extends Fragment {
     }
 
     public void loadHistory() {
-
-        listBarangTrans = new ArrayList<>();
-        listTrans = new ArrayList<>();
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 getResources().getString(R.string.url) + "/seller/gettransaksi",
@@ -96,6 +93,8 @@ public class SellerTransaksiFragment extends Fragment {
                     public void onResponse(String response) {
                         System.out.println(response);
                         try {
+                            listBarangTrans = new ArrayList<>();
+                            listTrans = new ArrayList<>();
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray arraytrans = jsonObject.getJSONArray("datatrans");
 
