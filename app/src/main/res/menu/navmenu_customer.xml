@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/customerhome"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        app:showAsAction="always" />
+<!--    <item-->
+<!--        android:id="@+id/customersearch"-->
+<!--        android:icon="@android:drawable/ic_menu_search"-->
+<!--        android:title="Search"-->
+<!--        app:showAsAction="always" />-->
+
+    <item
+        android:id="@+id/customertransaksi"
+        android:icon="@drawable/ic_list"
+        android:title="Transaksi"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/customerwishlist"
+        android:icon="@drawable/ic_baseline_favorite_border_24_black"
+        android:title="Wishlist"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/customercart"
+        android:icon="@drawable/ic_cart"
+        android:title="Cart"
+        app:showAsAction="always" />
+
+</menu>

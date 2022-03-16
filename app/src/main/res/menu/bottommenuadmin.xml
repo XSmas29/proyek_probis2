@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/ic_baseline_dashboard_24"
+        android:title="Dashboard"
+        android:id="@+id/bottomdashboard"/>
+
+    <item
+        android:icon="@drawable/ic_baseline_group_24"
+        android:title="Master User"
+        android:id="@+id/bottommasteruser"/>
+
+    <item
+        android:icon="@drawable/ic_baseline_add_card_24"
+        android:title="Conf. Top Up"
+        android:id="@+id/bottomconftopup"/>
+
+    <item
+        android:icon="@drawable/ic_baseline_account_balance_wallet_24"
+        android:title="Conf. Withdraw"
+        android:id="@+id/bottomconfwithdraw"/>
+</menu>

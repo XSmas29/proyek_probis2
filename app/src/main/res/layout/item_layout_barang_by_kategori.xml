@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llKategoriContainer"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:isScrollContainer="true">
+
+    <TextView
+        android:id="@+id/textView_namaKategori"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Kategori"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"/>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/llProductContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:isScrollContainer="true">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView0"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:cardUseCompatPadding="true"
+                >
+                <LinearLayout
+                    android:id="@+id/ll0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <ImageView
+                        android:id="@+id/imageView_product0"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"/>
+                    <TextView
+                        android:id="@+id/textView_namaProduct0"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Nama Product"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:id="@+id/textView_hargaProduct0"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Rp 0"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView1"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:cardUseCompatPadding="true"
+                >
+                <LinearLayout
+                    android:id="@+id/ll1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <ImageView
+                        android:id="@+id/imageView_product1"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"/>
+                    <TextView
+                        android:id="@+id/textView_namaProduct1"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Nama Product"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <TextView
+                        android:id="@+id/textView_hargaProduct1"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Rp 0"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:cardUseCompatPadding="true"
+                >
+                <LinearLayout
+                    android:id="@+id/ll2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <ImageView
+                        android:id="@+id/imageView_product2"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"/>
+                    <TextView
+                        android:id="@+id/textView_namaProduct2"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Nama Product"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <TextView
+                        android:id="@+id/textView_hargaProduct2"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Rp 0"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:cardUseCompatPadding="true"
+                >
+                <LinearLayout
+                    android:id="@+id/ll3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <ImageView
+                        android:id="@+id/imageView_product3"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"/>
+                    <TextView
+                        android:id="@+id/textView_namaProduct3"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Nama Product"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <TextView
+                        android:id="@+id/textView_hargaProduct3"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Rp 0"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView4"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardMaxElevation="4dp"
+                app:cardUseCompatPadding="true"
+                >
+                <LinearLayout
+                    android:id="@+id/ll4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <ImageView
+                        android:id="@+id/imageView_product4"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"/>
+                    <TextView
+                        android:id="@+id/textView_namaProduct4"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Nama Product"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <TextView
+                        android:id="@+id/textView_hargaProduct4"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:gravity="center"
+                        android:text="Rp 0"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+
+</LinearLayout>
