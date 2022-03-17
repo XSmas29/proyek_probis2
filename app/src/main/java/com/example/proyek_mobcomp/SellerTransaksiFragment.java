@@ -38,6 +38,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+
+    Update Change =
+    - 17 Maret 2022 : Sudah bisa menampilkan sesuai username seller
+
+ */
+
 public class SellerTransaksiFragment extends Fragment {
 
     FragmentSellerTransaksiBinding binding;
@@ -144,6 +151,7 @@ public class SellerTransaksiFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+                params.put("username", SellerActivity.login+"");
                 params.put("status", binding.spFilterTransaksiSeller.getSelectedItem().toString());
                 return params;
             }
