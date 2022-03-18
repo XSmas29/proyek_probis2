@@ -25,6 +25,8 @@ import com.example.proyek_mobcomp.classFolder.cKategori;
 import com.example.proyek_mobcomp.classFolder.cProduct;
 import com.example.proyek_mobcomp.databinding.ActivitySellerAddEditBarangBinding;
 import com.example.proyek_mobcomp.databinding.ActivitySellerBinding;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -62,10 +64,22 @@ public class SellerAddEditBarangActivity extends AppCompatActivity {
             binding.edAddStokProduk.setText(produk.getStok() + "");
             Picasso.get()
                     .load(getResources().getString(R.string.url) + "/produk/" + produk.getGambar())
-                    .into(binding.imgPlaceholderProduk);
-            BitmapDrawable currentImage = (BitmapDrawable)binding.imgPlaceholderProduk.getDrawable();
+                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                    .into(binding.imgPlaceholderProduk, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            BitmapDrawable currentImage = (BitmapDrawable)binding.imgPlaceholderProduk.getDrawable();
+                            bitmap = currentImage.getBitmap();
+                            System.out.println("berhasil");
+                        }
 
-            bitmap = currentImage.getBitmap();
+                        @Override
+                        public void onError(Exception e) {
+                            System.out.println("gagal");
+                        }
+                    });
+
+
         }
         getkategori();
         setContentView(binding.getRoot());
@@ -105,6 +119,7 @@ public class SellerAddEditBarangActivity extends AppCompatActivity {
         }
         else{
             if (getIntent().hasExtra("produk")){
+
                 StringRequest stringRequest = new StringRequest(
                         Request.Method.POST,
                         getResources().getString(R.string.url) + "/seller/editproduk",

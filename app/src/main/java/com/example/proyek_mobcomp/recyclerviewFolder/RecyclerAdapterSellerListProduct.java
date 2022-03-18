@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyek_mobcomp.R;
 import com.example.proyek_mobcomp.classFolder.cProduct;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -83,6 +84,7 @@ public class RecyclerAdapterSellerListProduct extends RecyclerView.Adapter<Recyc
         public void bind(cProduct produk, int position) {
             Picasso.get()
                     .load(itemView.getResources().getString(R.string.url) + "/produk/" + listProduk.get(position).getGambar())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                     .into(imgProduk);
 
             txtNamaProduk.setText(listProduk.get(position).getNama());

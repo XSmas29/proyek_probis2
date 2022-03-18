@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -44,8 +45,6 @@ import java.util.Map;
 public class SellerListBarangFragment extends Fragment {
 
     FragmentSellerListBarangBinding binding;
-
-    ArrayList<cProduct> listProduk = new ArrayList<>();
     ArrayList<cKategori> listKategori = new ArrayList<>();
     RecyclerAdapterSellerListProduct recyclerAdapterSellerListProduct;
     ArrayList<String> listNamaKategori;
@@ -66,6 +65,7 @@ public class SellerListBarangFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("load dari activityresult");
         if (!binding.spFilterSellerKategori.getSelectedItem().toString().equalsIgnoreCase("semua kategori")){
             loadproduk(binding.spFilterSellerKategori.getSelectedItem().toString());
         }
@@ -80,6 +80,7 @@ public class SellerListBarangFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentSellerListBarangBinding.inflate(getLayoutInflater());
         getkategori();
+        System.out.println("load dari oncreateview");
         loadproduk("All");
 
         binding.btnAddProduk.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +95,7 @@ public class SellerListBarangFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 System.out.println(adapterView.getSelectedItem().toString());
+                System.out.println("load dari onitemselected");
                 if (!adapterView.getSelectedItem().toString().equalsIgnoreCase("semua kategori")){
                     loadproduk(adapterView.getSelectedItem().toString());
                 }
@@ -118,7 +120,6 @@ public class SellerListBarangFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //System.out.println(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
 
@@ -166,7 +167,7 @@ public class SellerListBarangFragment extends Fragment {
     }
 
     private void loadproduk(String kategori) {
-        listProduk = new ArrayList<>();
+        ArrayList<cProduct> listProduk = new ArrayList<>();
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 getResources().getString(R.string.url) + "/seller/listproduk",
@@ -176,6 +177,7 @@ public class SellerListBarangFragment extends Fragment {
                         //System.out.println(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            System.out.println(jsonObject);
                             JSONArray arrayproduk = jsonObject.getJSONArray("dataproduk");
                             for (int i = 0; i < arrayproduk.length(); i++){
                                 int id = arrayproduk.getJSONObject(i).getInt("id");
@@ -190,7 +192,7 @@ public class SellerListBarangFragment extends Fragment {
 
                                 listProduk.add(new cProduct(id, fk_seller, fk_kategori, nama, deskripsi, harga, stok, gambar, is_deleted));
                             }
-                            SetupRvProduk();
+                            SetupRvProduk(listProduk);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -217,10 +219,10 @@ public class SellerListBarangFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    private void SetupRvProduk() {
+    private void SetupRvProduk(ArrayList<cProduct> listProduk) {
         binding.rvListProduk.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.rvListProduk.setHasFixedSize(true);
-
+        System.out.println(listProduk.size());
         recyclerAdapterSellerListProduct = new RecyclerAdapterSellerListProduct(listProduk);
         recyclerAdapterSellerListProduct.setOnItemClickCallback(new RecyclerAdapterSellerListProduct.OnItemClickCallback() {
             @Override
