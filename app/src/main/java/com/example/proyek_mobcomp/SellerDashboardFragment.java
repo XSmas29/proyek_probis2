@@ -87,7 +87,7 @@ public class SellerDashboardFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONObject datauser = jsonObject.getJSONObject("datauser");
                             binding.txtWelcome.setText("Welcome, " + datauser.getString("username"));
-                            binding.txtDashboardSaldo.setText("Saldo-mu : Rp. " + datauser.getInt("saldo"));
+                            binding.txtDashboardSaldo.setText("Rp. " + datauser.getInt("saldo"));
 
                             JSONArray datadetail = jsonObject.getJSONArray("datadetail");
                             for (int i = 0; i < datadetail.length(); i++) {
@@ -103,10 +103,10 @@ public class SellerDashboardFragment extends Fragment {
                                 }
                             }
 
-                            binding.txtDashboardJumlah1.setText("Kamu sudah menyelesaikan " + jumlahcomplete + " transaksi");
-                            binding.txtDashboardJumlah2.setText("Kamu sudah mereject " + jumlahreject + " transaksi");
-                            binding.txtDashboardJumlah3.setText("Ada " + jumlahprocess + " transaksi yang harus kamu selesaikan");
-                            binding.txtDashboardJumlah4.setText("Total pendapatanmu adalah Rp. " + totalincome);
+                            binding.txtDashboardJumlah1.setText(jumlahcomplete + "");
+                            binding.txtDashboardJumlah2.setText(jumlahreject+ "");
+                            binding.txtDashboardJumlah3.setText(jumlahprocess + "");
+                            binding.txtDashboardJumlah4.setText("Rp. " + totalincome);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
