@@ -1,8 +1,12 @@
 package com.example.proyek_mobcomp.recyclerviewFolder;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.content.DialogInterface;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -41,9 +48,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+    Update Changes =
+        20 Maret 2022 : Muncul message box ketika ingin menghapus barang dari wishlist
+ */
+
 public class RecyclerAdapterCustomerWishlist extends RecyclerView.Adapter<RecyclerAdapterCustomerWishlist.ViewHolder> {
     ArrayList<cWishlist> arrWishlist = new ArrayList<>();
     CustomerWishlistFragment customerWishlistFragment;
+
 
     public RecyclerAdapterCustomerWishlist(ArrayList<cWishlist> arrWishlist, CustomerWishlistFragment customerWishlistFragment) {
         this.arrWishlist = arrWishlist;
@@ -79,6 +92,7 @@ public class RecyclerAdapterCustomerWishlist extends RecyclerView.Adapter<Recycl
         ImageView profileToko, fotoProduct;
         TextView txtNamaToko, txtNamaProduct, txtHargaProduct;
         ImageButton btnDelete;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             db = AppDatabase.getInstance(itemView.getContext());
@@ -89,6 +103,7 @@ public class RecyclerAdapterCustomerWishlist extends RecyclerView.Adapter<Recycl
             txtNamaProduct = itemView.findViewById(R.id.textView_productName);
             txtHargaProduct = itemView.findViewById(R.id.textView_productPrice);
             btnDelete = itemView.findViewById(R.id.imageButton_delete);
+
         }
 
         public void bind(cWishlist wishlist, int position) {
@@ -152,70 +167,130 @@ public class RecyclerAdapterCustomerWishlist extends RecyclerView.Adapter<Recycl
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    StringRequest stringRequest = new StringRequest(
-                            Request.Method.POST,
-                            itemView.getResources().getString(R.string.url) + "/customer/updatewishlist",
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    System.out.println(response);
 
-                                    try {
-                                        JSONObject jsonObject = new JSONObject(response);
+                    AlertDialog.Builder builder
+                            = new AlertDialog
+                            .Builder(itemView.getContext());
 
-                                        int code = jsonObject.getInt("code");
-                                        String message = jsonObject.getString("message");
+                    // Set the message show for the Alert time
+                    builder.setMessage("Anda yakin ingin menghapus barang ini dari wishlist ?");
 
-//                                        // seller
-//                                        JSONObject seller = jsonObject.getJSONObject("dataseller");
-//
-//                                        txtNamaToko.setText(seller.getString("toko"));
-//                                        String gambar = seller.getString("gambar");
-//                                        Picasso.get().load(itemView.getResources().getString(R.string.url) + "/profile/" +
-//                                                gambar).into(profileToko);
-//
-//                                        // product
-//                                        JSONObject product = jsonObject.getJSONObject("dataproduct");
-//                                        txtNamaProduct.setText(product.getString("nama"));
-//                                        gambar = product.getString("gambar");
-//                                        Picasso.get().load(itemView.getResources().getString(R.string.url) + "/produk/" +
-//                                                gambar).into(fotoProduct);
-//
-//
-//                                        txtHargaProduct.setText("Rp " + product.getString("harga"));
+                    // Set Alert Title
+                    builder.setTitle("Peringatan");
 
-                                        if (code == 1){
-                                            Toast.makeText(itemView.getContext(), message+"", Toast.LENGTH_LONG).show();
-                                            customerWishlistFragment.getWishlistData();
+                    // Set Cancelable false
+                    // for when the user clicks on the outside
+                    // the Dialog Box then it will remain show
+                    builder.setCancelable(false);
+
+                    // Set the positive button with yes name
+                    // OnClickListener method is use of
+                    // DialogInterface interface.
+
+                    builder
+                            .setPositiveButton(
+                                    "Yes",
+                                    new DialogInterface
+                                            .OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog,
+                                                            int which)
+                                        {
+                                            StringRequest stringRequest = new StringRequest(
+                                                    Request.Method.POST,
+                                                    itemView.getResources().getString(R.string.url) + "/customer/updatewishlist",
+                                                    new Response.Listener<String>() {
+                                                        @Override
+                                                        public void onResponse(String response) {
+                                                            System.out.println(response);
+
+                                                            try {
+                                                                JSONObject jsonObject = new JSONObject(response);
+
+                                                                int code = jsonObject.getInt("code");
+                                                                String message = jsonObject.getString("message");
+
+                                                                //                                        // seller
+                                                                //                                        JSONObject seller = jsonObject.getJSONObject("dataseller");
+                                                                //
+                                                                //                                        txtNamaToko.setText(seller.getString("toko"));
+                                                                //                                        String gambar = seller.getString("gambar");
+                                                                //                                        Picasso.get().load(itemView.getResources().getString(R.string.url) + "/profile/" +
+                                                                //                                                gambar).into(profileToko);
+                                                                //
+                                                                //                                        // product
+                                                                //                                        JSONObject product = jsonObject.getJSONObject("dataproduct");
+                                                                //                                        txtNamaProduct.setText(product.getString("nama"));
+                                                                //                                        gambar = product.getString("gambar");
+                                                                //                                        Picasso.get().load(itemView.getResources().getString(R.string.url) + "/produk/" +
+                                                                //                                                gambar).into(fotoProduct);
+                                                                //
+                                                                //
+                                                                //                                        txtHargaProduct.setText("Rp " + product.getString("harga"));
+
+                                                                if (code == 1){
+                                                                    Toast.makeText(itemView.getContext(), message+"", Toast.LENGTH_LONG).show();
+                                                                    customerWishlistFragment.getWishlistData();
+                                                                }
+
+
+                                                            } catch (JSONException e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                        }
+                                                    },
+                                                    new Response.ErrorListener() {
+                                                        @Override
+                                                        public void onErrorResponse(VolleyError error) {
+                                                            System.out.println("error saat update wishlist di wishlist fragment " + error);
+                                                        }
+                                                    }
+                                            ){
+                                                @Nullable
+                                                @Override
+                                                protected Map<String, String> getParams() throws AuthFailureError {
+                                                    Map<String, String> params = new HashMap<>();
+                                                    params.put("function", "deletewishlist");
+                                                    params.put("idwishlist", wishlist.getId()+"");
+
+                                                    return params;
+                                                }
+                                            };
+
+                                            RequestQueue requestQueue = Volley.newRequestQueue(itemView.getContext());
+                                            requestQueue.add(stringRequest);
                                         }
+                                    });
 
+                    // Set the Negative button with No name
+                    // OnClickListener method is use
+                    // of DialogInterface interface.
+                    builder
+                            .setNegativeButton(
+                                    "No",
+                                    new DialogInterface
+                                            .OnClickListener() {
 
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    System.out.println("error saat update wishlist di wishlist fragment " + error);
-                                }
-                            }
-                    ){
-                        @Nullable
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String> params = new HashMap<>();
-                            params.put("function", "deletewishlist");
-                            params.put("idwishlist", wishlist.getId()+"");
+                                        @Override
+                                        public void onClick(DialogInterface dialog,
+                                                            int which)
+                                        {
 
-                            return params;
-                        }
-                    };
+                                            // If user click no
+                                            // then dialog box is canceled.
+                                            dialog.cancel();
+                                        }
+                                    });
 
-                    RequestQueue requestQueue = Volley.newRequestQueue(itemView.getContext());
-                    requestQueue.add(stringRequest);
+                    // Create the Alert dialog
+                    AlertDialog alertDialog = builder.create();
+
+                    // Show the Alert Dialog box
+                    alertDialog.show();
+
                 }
+
             });
 
             ll.setOnClickListener(new View.OnClickListener() {
@@ -227,6 +302,9 @@ public class RecyclerAdapterCustomerWishlist extends RecyclerView.Adapter<Recycl
                     ((Activity)itemView.getContext()).startActivityForResult(i, 120);
                 }
             });
+
         }
+
+
     }
 }
