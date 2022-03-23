@@ -370,12 +370,17 @@ public class AdminUserProfileActivity extends AppCompatActivity {
         binding.etRegisterNama.setText(user.getNama());
         binding.etRegisterRekening.setText(user.getRekening());
 
-        if (!user.getToko().isEmpty()){
+        if (!user.getToko().isEmpty()){ // berikut untuk menampilkan form apabila user adalah seller
             ViewGroup.LayoutParams params = binding.etRegisterToko.getLayoutParams();
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             binding.etRegisterToko.setLayoutParams(params);
             binding.etRegisterToko.setText(user.getToko());
             binding.etRegisterToko.setEnabled(true);
+
+            // berikut untuk menampilkan linear layout apabila user adalah seller
+            params = binding.llRegisterToko.getLayoutParams();
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            binding.llRegisterToko.setLayoutParams(params);
         }
 
         if (user.getStatus() == 1){

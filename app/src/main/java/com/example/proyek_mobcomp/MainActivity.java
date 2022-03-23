@@ -29,6 +29,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+
+    Update Changes =
+    23 Maret 2022 : perbaikan jika ter-banned maka tidak bisa login, baik itu manual login maupun auto-login (remember me)
+
+ */
+
 public class MainActivity extends AppCompatActivity {
     protected ActivityMainBinding bind;
 
@@ -58,13 +65,15 @@ public class MainActivity extends AppCompatActivity {
             user = gson.fromJson(loginjson, new TypeToken<cUser>(){}.getType());
 
             if (user.getRole().equalsIgnoreCase("CUSTOMER")){
-                Intent i = new Intent(this, CustomerHomeActivity.class);
+                doLogin(user.getUsername(), 0);
+                /*Intent i = new Intent(this, CustomerHomeActivity.class);
                 i.putExtra("login", user.getUsername());
-                startActivity(i);
+                startActivity(i);*/
             }else if (user.getRole().equalsIgnoreCase("SELLER")){
-                Intent i = new Intent(this, SellerActivity.class);
-                i.putExtra("login", user.getUsername());
-                startActivity(i);
+                doLogin(user.getUsername(), 0);
+//                Intent i = new Intent(this, SellerActivity.class);
+//                i.putExtra("login", user.getUsername());
+//                startActivity(i);
             }
         }
 
@@ -112,64 +121,85 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                     }
                 }else{
-                    StringRequest stringRequest = new StringRequest(
-                            Request.Method.POST,
-                            getResources().getString(R.string.url) + "/login",
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    System.out.println(response);
-
-                                    try {
-                                        JSONObject jsonObject = new JSONObject(response);
-
-                                        int code = jsonObject.getInt("code");
-                                        String message = jsonObject.getString("message");
-                                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-
-                                        SharedPreferences sharedpreferences = getSharedPreferences("data", getBaseContext().MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = sharedpreferences.edit();
-
-                                        editor.putString("login",jsonObject.getString("datauser"));
-                                        editor.commit();
-
-                                        if (code == 1){ // customer
-                                            Intent i = new Intent(MainActivity.this, CustomerHomeActivity.class);
-                                            i.putExtra("login", bind.etLoginUsername.getText().toString());
-                                            startActivity(i);
-                                        }else if (code == 2){ // seller
-                                            Intent i = new Intent(MainActivity.this, SellerActivity.class);
-                                            i.putExtra("login", bind.etLoginUsername.getText().toString());
-                                            startActivity(i);
-                                        }
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    System.out.println("error login " + error);
-                                }
-                            }
-                    ){
-                        @Nullable
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String> params = new HashMap<>();
-                            params.put("username", bind.etLoginUsername.getText().toString());
-                            params.put("password", bind.etLoginPassword.getText().toString());
-                            return params;
-                        }
-                    };
-
-                    RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
-                    requestQueue.add(stringRequest);
+                    doLogin(bind.etLoginUsername.getText().toString(), 1);
                 }
             }
         });
+    }
+
+    protected void doLogin(String txtUsername, int isManual) {
+        /*
+            note :
+            - is Manual = 1 (manual), 0 (auto)
+         */
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                getResources().getString(R.string.url) + "/login",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            int code = jsonObject.getInt("code");
+                            String message = jsonObject.getString("message");
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+                            if (code == 1 || code == 2){
+                                SharedPreferences sharedpreferences = getSharedPreferences("data", getBaseContext().MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                editor.putString("login",jsonObject.getString("datauser"));
+                                editor.commit();
+                            }
+
+
+                            if (code == 1){ // customer
+                                Intent i = new Intent(MainActivity.this, CustomerHomeActivity.class);
+                                i.putExtra("login", txtUsername);
+                                startActivity(i);
+                            }else if (code == 2){ // seller
+                                Intent i = new Intent(MainActivity.this, SellerActivity.class);
+                                i.putExtra("login", txtUsername);
+                                startActivity(i);
+                            }else if (code == -4){
+                                if (isManual == 0) { // delete data remember me dari android apabila user di-banned
+                                    SharedPreferences sharedpreferences = getSharedPreferences("data", getBaseContext().MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                                    editor.remove("login");
+                                    editor.commit();
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("error login " + error);
+                    }
+                }
+        ){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", txtUsername);
+                params.put("ismanual", String.valueOf(isManual));
+                if (isManual == 1){ // send password for verification
+                    params.put("password", bind.etLoginPassword.getText().toString());
+                }
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
+        requestQueue.add(stringRequest);
     }
 
     protected void checkField(){
