@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:ems="10"
-        android:hint="Min. Rp. 10000"
+        android:hint="Min. Rp. 10.000"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

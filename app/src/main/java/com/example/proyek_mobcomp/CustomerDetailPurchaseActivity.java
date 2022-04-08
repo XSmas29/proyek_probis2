@@ -1,9 +1,12 @@
 package com.example.proyek_mobcomp;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -29,7 +32,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,6 +74,13 @@ public class CustomerDetailPurchaseActivity extends AppCompatActivity {
         if (idHTrans != -1){
             getTransData();
         }
+
+        binding.imageButtonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void getTransData() {
@@ -187,9 +199,27 @@ public class CustomerDetailPurchaseActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void showData() {
         binding.textViewIdHTrans.setText("Transaction ID #" + htrans.getId());
-        binding.textViewGrandtotal.setText("Rp " + htrans.getGrandtotal());
+        binding.textViewGrandtotal.setText("Rp " + htrans.getGrandtotalInString());
+
+        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
+
+        Date d = null;
+        try
+        {
+            d = input.parse(htrans.getTanggal());
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        String formatted = output.format(d);
+        System.out.println(formatted);
+
+        binding.textViewTanggalTrans.setText(formatted);
 
         setRv();
     }

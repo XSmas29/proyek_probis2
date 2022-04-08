@@ -60,7 +60,7 @@ public class SellerAddEditBarangActivity extends AppCompatActivity {
             binding.btnUploadProduk.setText("Edit Produk");
             binding.edAddNamaProduk.setText(produk.getNama());
             binding.edAddDeskripsiProduk.setText(produk.getDeskripsi());
-            binding.edAddHargaProduk.setText(produk.getHarga() + "");
+            binding.edAddHargaProduk.setText(produk.getHargaInString() + "");
             binding.edAddStokProduk.setText(produk.getStok() + "");
             Picasso.get()
                     .load(getResources().getString(R.string.url) + "/produk/" + produk.getGambar())

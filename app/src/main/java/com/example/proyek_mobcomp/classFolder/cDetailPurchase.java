@@ -95,6 +95,30 @@ public class cDetailPurchase implements Parcelable {
         return subtotal;
     }
 
+    public String getSubtotalInString(){
+        int ctr = 0; // untuk menghitung berapa digit yg sudah masuk ke variable hasil
+        String hasil = "";
+
+        String awal = String.valueOf(this.subtotal);
+        String temp = ""; // penampung sementara untuk dalam for
+        System.out.println(awal.length());
+        for (int i = awal.length(); i > 0 ; i--){
+            if (ctr % 3 == 0) {
+                if (i != awal.length()) {
+                    hasil = "." + hasil;
+                }
+            }
+            if (i != awal.length()) {
+                hasil = awal.substring((i - 1), (i)) + hasil;
+            }else{
+                hasil = awal.substring((i - 1)) + hasil;
+            }
+            ctr++;
+        }
+
+        return hasil;
+    }
+
     public void setSubtotal(int subtotal) {
         this.subtotal = subtotal;
     }

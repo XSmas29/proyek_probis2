@@ -142,7 +142,8 @@ public class CustomerTopUpSaldoActivity extends AppCompatActivity {
                             if (code != 1){
                                 Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
                             }else{
-                                binding.textViewJumlahSaldo.setText("MyWallet Balance : Rp " + saldo);
+                                String money = moneySeparator(saldo);
+                                binding.textViewJumlahSaldo.setText("MyWallet Balance : Rp " + money);
 
                                 JSONArray historyarray = jsonObject.getJSONArray("datatopup");
                                 arrTopUp = new ArrayList<>();
@@ -184,6 +185,30 @@ public class CustomerTopUpSaldoActivity extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this );
         requestQueue.add(stringRequest);
+    }
+
+    protected String moneySeparator(int harga) {
+        int ctr = 0; // untuk menghitung berapa digit yg sudah masuk ke variable hasil
+        String hasil = "";
+
+        String awal = String.valueOf(harga);
+        String temp = ""; // penampung sementara untuk dalam for
+        System.out.println(awal.length());
+        for (int i = awal.length(); i > 0 ; i--){
+            if (ctr % 3 == 0) {
+                if (i != awal.length()) {
+                    hasil = "." + hasil;
+                }
+            }
+            if (i != awal.length()) {
+                hasil = awal.substring((i - 1), (i)) + hasil;
+            }else{
+                hasil = awal.substring((i - 1)) + hasil;
+            }
+            ctr++;
+        }
+
+        return hasil;
     }
 
     protected void setRv() {

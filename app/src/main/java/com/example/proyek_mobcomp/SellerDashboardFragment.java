@@ -87,7 +87,9 @@ public class SellerDashboardFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONObject datauser = jsonObject.getJSONObject("datauser");
                             binding.txtWelcome.setText("Welcome, " + datauser.getString("username"));
-                            binding.txtDashboardSaldo.setText("Rp. " + datauser.getInt("saldo"));
+
+                            String money = moneySeparator(datauser.getInt("saldo"));
+                            binding.txtDashboardSaldo.setText("Rp. " + money);
 
                             JSONArray datadetail = jsonObject.getJSONArray("datadetail");
                             for (int i = 0; i < datadetail.length(); i++) {
@@ -106,7 +108,8 @@ public class SellerDashboardFragment extends Fragment {
                             binding.txtDashboardJumlah1.setText(jumlahcomplete + "");
                             binding.txtDashboardJumlah2.setText(jumlahreject+ "");
                             binding.txtDashboardJumlah3.setText(jumlahprocess + "");
-                            binding.txtDashboardJumlah4.setText("Rp. " + totalincome);
+                            money = moneySeparator(totalincome);
+                            binding.txtDashboardJumlah4.setText("Rp. " + money);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -162,5 +165,29 @@ public class SellerDashboardFragment extends Fragment {
 
         //munculkan popupmenu
         popupMenu.show();
+    }
+
+    protected String moneySeparator(int harga) {
+        int ctr = 0; // untuk menghitung berapa digit yg sudah masuk ke variable hasil
+        String hasil = "";
+
+        String awal = String.valueOf(harga);
+        String temp = ""; // penampung sementara untuk dalam for
+        System.out.println(awal.length());
+        for (int i = awal.length(); i > 0 ; i--){
+            if (ctr % 3 == 0) {
+                if (i != awal.length()) {
+                    hasil = "." + hasil;
+                }
+            }
+            if (i != awal.length()) {
+                hasil = awal.substring((i - 1), (i)) + hasil;
+            }else{
+                hasil = awal.substring((i - 1)) + hasil;
+            }
+            ctr++;
+        }
+
+        return hasil;
     }
 }

@@ -204,7 +204,7 @@ public class AdminConfWithdrawDetailActivity extends AppCompatActivity {
         binding.textViewNamaToko.setText("Nama Toko : " + user.getToko());
         binding.textViewUsernameUser.setText("Username : " + user.getUsername());
         binding.textViewIdWithdraw.setText("ID Withdraw : " + topup.getId());
-        binding.textViewJumTopUp.setText("Jumlah Withdraw : Rp " + topup.getJumlah());
+        binding.textViewJumTopUp.setText("Jumlah Withdraw : Rp " + topup.getJumlahInString());
 
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM yyyy");

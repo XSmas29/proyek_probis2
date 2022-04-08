@@ -93,7 +93,7 @@ public class RecyclerAdapterAdminConfTopUp extends RecyclerView.Adapter<Recycler
             System.out.println(formatted);
 
             txtTanggal.setText("Tanggal : " + formatted);
-            txtJumlah.setText("Jumlah : Rp. " + topup.getJumlah());
+            txtJumlah.setText("Jumlah : Rp. " + topup.getJumlahInString());
             if (topup.getStatus() == 0){
                 txtStatus.setText("Status : Pending");
                 txtStatus.setTextColor(itemView.getResources().getColor(R.color.yellow));

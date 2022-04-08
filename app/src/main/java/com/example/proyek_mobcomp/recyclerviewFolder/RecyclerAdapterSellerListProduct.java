@@ -88,7 +88,7 @@ public class RecyclerAdapterSellerListProduct extends RecyclerView.Adapter<Recyc
                     .into(imgProduk);
 
             txtNamaProduk.setText(listProduk.get(position).getNama());
-            txtHargaProduk.setText("Rp. " + listProduk.get(position).getHarga());
+            txtHargaProduk.setText("Rp. " + listProduk.get(position).getHargaInString());
             txtStokProduk.setText("Stok : " + listProduk.get(position).getStok());
         }
     }

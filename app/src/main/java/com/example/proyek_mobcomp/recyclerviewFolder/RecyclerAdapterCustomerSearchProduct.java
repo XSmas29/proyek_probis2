@@ -82,7 +82,7 @@ public class RecyclerAdapterCustomerSearchProduct extends RecyclerView.Adapter<R
                     arrProduct.get(position).getGambar()).into(imgProduct);
 
             namaProduct.setText(product.getNama());
-            hargaProduct.setText("Rp. " + product.getHarga());
+            hargaProduct.setText("Rp. " + product.getHargaInString());
 
 
             Picasso.get().load(itemView.getResources().getString(R.string.url) + "/profile/" +

@@ -130,9 +130,10 @@ public class RecyclerAdapterCustomerCart extends RecyclerView.Adapter<RecyclerAd
 
                                 int total = cart.getJumlah() * cart.getHarga();
 
-                                txtHargaProduct.setText("Rp " + cart.getHarga());
+                                txtHargaProduct.setText("Rp " + cart.getHargaInString());
                                 txtJumlah.setText(cart.getJumlah()+"");
-                                txtTotal.setText("Rp " + total);
+                                String money = moneySeparator(total);
+                                txtTotal.setText("Rp " + money);
                                 txtCatatan.setText(cart.getCatatan());
                                 CustomerCartFragment.total += total;
                                 customerCartFragment.setTotal();
@@ -204,5 +205,29 @@ public class RecyclerAdapterCustomerCart extends RecyclerView.Adapter<RecyclerAd
                 }
             });
         }
+    }
+
+    protected String moneySeparator(int money) {
+        int ctr = 0; // untuk menghitung berapa digit yg sudah masuk ke variable hasil
+        String hasil = "";
+
+        String awal = String.valueOf(money);
+        String temp = ""; // penampung sementara untuk dalam for
+        System.out.println(awal.length());
+        for (int i = awal.length(); i > 0 ; i--){
+            if (ctr % 3 == 0) {
+                if (i != awal.length()) {
+                    hasil = "." + hasil;
+                }
+            }
+            if (i != awal.length()) {
+                hasil = awal.substring((i - 1), (i)) + hasil;
+            }else{
+                hasil = awal.substring((i - 1)) + hasil;
+            }
+            ctr++;
+        }
+
+        return hasil;
     }
 }

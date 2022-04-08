@@ -486,7 +486,7 @@ public class CustomerDetailProduct extends AppCompatActivity {
                 product.getGambar()).into(binding.imageViewProductPicture);
 
         binding.textViewProductName.setText(product.getNama());
-        binding.textViewProductPrice.setText("Rp " + product.getHarga());
+        binding.textViewProductPrice.setText("Rp " + product.getHargaInString());
         binding.textViewProductStock.setText("Stok : " + product.getStok());
         binding.textViewProductDescription.setText("Detail produk : \n"+product.getDeskripsi());
 
@@ -511,7 +511,7 @@ public class CustomerDetailProduct extends AppCompatActivity {
                 arrImageView[ctrBarang].setLayoutParams(params);
 
                 arrTxtNamaProduct[ctrBarang].setText(arrRecommendationProduct.get(i).getNama());
-                arrTxtHargaProduct[ctrBarang].setText("Rp " + arrRecommendationProduct.get(i).getHarga());
+                arrTxtHargaProduct[ctrBarang].setText("Rp " + arrRecommendationProduct.get(i).getHargaInString());
 
                 int idProduct = arrRecommendationProduct.get(i).getId();
                 arrLlProduct[ctrBarang].setOnClickListener(new View.OnClickListener() {

@@ -203,7 +203,7 @@ public class AdminConfTopUpDetailActivity extends AppCompatActivity {
         binding.textViewNamaUser.setText("Nama User : " + user.getNama());
         binding.textViewUsernameUser.setText("Username : " + user.getUsername());
         binding.textViewIdTopUp.setText("ID Top Up : " + topup.getId());
-        binding.textViewJumTopUp.setText("Jumlah Top Up : Rp " + topup.getJumlah());
+        binding.textViewJumTopUp.setText("Jumlah Top Up : Rp " + topup.getJumlahInString());
 
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat output = new SimpleDateFormat("dd MMM yyyy");

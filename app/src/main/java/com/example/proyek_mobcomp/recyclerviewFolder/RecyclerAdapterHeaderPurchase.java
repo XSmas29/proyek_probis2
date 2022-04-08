@@ -65,7 +65,7 @@ public class RecyclerAdapterHeaderPurchase extends RecyclerView.Adapter<Recycler
 
         public void bind(cHeaderPurchase htrans, int position) {
             txtIdTrans.setText(htrans.getId()+"");
-            txtGrandtotal.setText("Rp " + htrans.getGrandtotal()+"");
+            txtGrandtotal.setText("Rp " + htrans.getGrandtotalInString()+"");
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             Date date = null;

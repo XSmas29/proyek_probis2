@@ -141,7 +141,8 @@ public class SellerSaldoFragment extends Fragment {
                             JSONObject datasaldo = jsonObject.getJSONObject("saldo");
                             int saldo = datasaldo.getInt("saldo");
 
-                            binding.txtSaldoSeller.setText("Saldo Anda : Rp. " + saldo);
+                            String money = moneySeparator(saldo);
+                            binding.txtSaldoSeller.setText("Saldo Anda : Rp. " + money);
 
                             for (int i = 0; i < arraytopup.length(); i++) {
                                 int id = arraytopup.getJSONObject(i).getInt("id");
@@ -186,5 +187,29 @@ public class SellerSaldoFragment extends Fragment {
 
         recyclerAdapterSellerTopup = new RecyclerAdapterSellerTopup(listTopup);
         binding.rvHistorySaldo.setAdapter(recyclerAdapterSellerTopup);
+    }
+
+    protected String moneySeparator(int harga) {
+        int ctr = 0; // untuk menghitung berapa digit yg sudah masuk ke variable hasil
+        String hasil = "";
+
+        String awal = String.valueOf(harga);
+        String temp = ""; // penampung sementara untuk dalam for
+        System.out.println(awal.length());
+        for (int i = awal.length(); i > 0 ; i--){
+            if (ctr % 3 == 0) {
+                if (i != awal.length()) {
+                    hasil = "." + hasil;
+                }
+            }
+            if (i != awal.length()) {
+                hasil = awal.substring((i - 1), (i)) + hasil;
+            }else{
+                hasil = awal.substring((i - 1)) + hasil;
+            }
+            ctr++;
+        }
+
+        return hasil;
     }
 }

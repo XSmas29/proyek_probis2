@@ -113,7 +113,7 @@ public class RecyclerAdapterCustomerHomeProduct extends RecyclerView.Adapter<Rec
                         arrImageView[ctrBarang].setLayoutParams(params);
 
                         arrTxtNamaProduct[ctrBarang].setText(arrProduct.get(j).getNama());
-                        arrTxtHargaProduct[ctrBarang].setText("Rp " + arrProduct.get(j).getHarga());
+                        arrTxtHargaProduct[ctrBarang].setText("Rp " + arrProduct.get(j).getHargaInString());
 
                         int idProduct = arrProduct.get(j).getId();
                         arrLlProduct[ctrBarang].setOnClickListener(new View.OnClickListener() {

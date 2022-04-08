@@ -89,7 +89,7 @@ public class RecyclerAdapterSellerTransaksi extends RecyclerView.Adapter<Recycle
 
             txtIDTrans.setText("Transaksi #" + detail.getId());
             txtNamaTrans.setText("Nama Barang : " + produk.getNama());
-            txtTotalTrans.setText("Total : Rp. " + detail.getSubtotal());
+            txtTotalTrans.setText("Total : Rp. " + detail.getSubtotalInString());
 
             if (detail.getStatus().equalsIgnoreCase("completed")){
                 txtStatusTrans.setTextColor(itemView.getResources().getColor(R.color.green));

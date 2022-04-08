@@ -134,8 +134,8 @@ public class RecyclerAdapterCustomerWishlist extends RecyclerView.Adapter<Recycl
                                 Picasso.get().load(itemView.getResources().getString(R.string.url) + "/produk/" +
                                         gambar).into(fotoProduct);
 
-
-                                txtHargaProduct.setText("Rp " + product.getString("harga"));
+                                String money = moneySeparator(product.getString("harga"));
+                                txtHargaProduct.setText("Rp " + money);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -306,5 +306,29 @@ public class RecyclerAdapterCustomerWishlist extends RecyclerView.Adapter<Recycl
         }
 
 
+    }
+
+    protected String moneySeparator(String harga) {
+        int ctr = 0; // untuk menghitung berapa digit yg sudah masuk ke variable hasil
+        String hasil = "";
+
+        String awal = String.valueOf(harga);
+        String temp = ""; // penampung sementara untuk dalam for
+        System.out.println(awal.length());
+        for (int i = awal.length(); i > 0 ; i--){
+            if (ctr % 3 == 0) {
+                if (i != awal.length()) {
+                    hasil = "." + hasil;
+                }
+            }
+            if (i != awal.length()) {
+                hasil = awal.substring((i - 1), (i)) + hasil;
+            }else{
+                hasil = awal.substring((i - 1)) + hasil;
+            }
+            ctr++;
+        }
+
+        return hasil;
     }
 }

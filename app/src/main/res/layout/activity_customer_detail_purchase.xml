@@ -28,24 +28,47 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:padding="10dp">
-                    <TextView
-                        android:id="@+id/textView_idHTrans"
+                    <ImageButton
+                        android:id="@+id/imageButton_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_arrow_back"
+                        android:background="@android:color/transparent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"/>
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Transaction ID"
-                        android:textColor="@color/black"
-                        android:textSize="22sp"
-                        android:textAlignment="center"/>
-                    <TextView
-                        android:id="@+id/textView_grandtotal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Rp 0"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textAlignment="center"/>
+                        android:orientation="vertical"
+                        android:layout_weight="0.05">
+                        <TextView
+                            android:id="@+id/textView_idHTrans"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Transaction ID"
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
+                            android:textAlignment="center"/>
+                        <TextView
+                            android:id="@+id/textView_grandtotal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 0"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textAlignment="center"/>
+                        <TextView
+                            android:id="@+id/textView_tanggalTrans"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Tanggal"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textAlignment="center"/>
+                    </LinearLayout>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

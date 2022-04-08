@@ -142,8 +142,9 @@ public class RecyclerAdapterDetailPurchase extends RecyclerView.Adapter<Recycler
                 }
             }
 
-            txtId.setText("Detal Order #" + dtrans.getFk_htrans() + "/" + dtrans.getId());
-            txtHargaProduct.setText("Rp " + (dtrans.getSubtotal() / dtrans.getJumlah()));
+            txtId.setText("Detail Order #" + dtrans.getFk_htrans() + "/" + dtrans.getId());
+            String money = moneySeparator(dtrans.getSubtotal() / dtrans.getJumlah());
+            txtHargaProduct.setText("Rp " + (money));
             txtJumlah.setText("Jumlah : " + dtrans.getJumlah());
             txtStatus.setText("Status : " + dtrans.getStatus());
             if (dtrans.getNotes_customer().toString().isEmpty() || dtrans.getNotes_customer().equals("")) {
@@ -386,5 +387,29 @@ public class RecyclerAdapterDetailPurchase extends RecyclerView.Adapter<Recycler
 
         }
 
+    }
+
+    protected String moneySeparator(int money) {
+        int ctr = 0; // untuk menghitung berapa digit yg sudah masuk ke variable hasil
+        String hasil = "";
+
+        String awal = String.valueOf(money);
+        String temp = ""; // penampung sementara untuk dalam for
+        System.out.println(awal.length());
+        for (int i = awal.length(); i > 0 ; i--){
+            if (ctr % 3 == 0) {
+                if (i != awal.length()) {
+                    hasil = "." + hasil;
+                }
+            }
+            if (i != awal.length()) {
+                hasil = awal.substring((i - 1), (i)) + hasil;
+            }else{
+                hasil = awal.substring((i - 1)) + hasil;
+            }
+            ctr++;
+        }
+
+        return hasil;
     }
 }
