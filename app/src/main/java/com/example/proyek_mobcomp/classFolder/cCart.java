@@ -17,13 +17,23 @@ public class cCart {
     protected int jumlah;
     protected int harga;
     protected String catatan;
+    protected String fk_seller;
 
-    public cCart(int idProduct, String username, int jumlah, int harga) {
+    public cCart(int idProduct, String username, int jumlah, int harga, String fk_seller) {
         this.idProduct = idProduct;
         this.username = username;
         this.jumlah = jumlah;
         this.harga = harga;
         this.catatan = "";
+        this.fk_seller = fk_seller;
+    }
+
+    public String getFk_seller() {
+        return fk_seller;
+    }
+
+    public void setFk_seller(String fk_seller) {
+        this.fk_seller = fk_seller;
     }
 
     public String getUsername() {

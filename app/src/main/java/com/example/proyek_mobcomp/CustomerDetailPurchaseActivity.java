@@ -50,8 +50,6 @@ public class CustomerDetailPurchaseActivity extends AppCompatActivity {
 
     int idHTrans = -1;
 
-    int idDTrans = -1;
-
     cHeaderPurchase htrans;
     ArrayList<cDetailPurchase> arrDTrans = new ArrayList<>();
     ArrayList<cReview> arrReview = new ArrayList<>();
@@ -68,8 +66,6 @@ public class CustomerDetailPurchaseActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         idHTrans = getIntent().getIntExtra("idHTrans", -1);
-
-        idDTrans = getIntent().getIntExtra("idDTrans", -1);
 
         if (idHTrans != -1){
             getTransData();
@@ -126,7 +122,7 @@ public class CustomerDetailPurchaseActivity extends AppCompatActivity {
                                 }
 
                                 arrDTrans.add(new cDetailPurchase(id, fk_htrans, fk_barang, jumlah,
-                                            subtotal, rating, review, fk_seller, status, notes_seller, notes_customer));
+                                        subtotal, rating, review, fk_seller, status, notes_seller, notes_customer));
                             }
 
                             JSONArray reviewArray = jsonObject.getJSONArray("datareview");
@@ -190,7 +186,6 @@ public class CustomerDetailPurchaseActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("function", "gettransdata");
                 params.put("idhtrans", idHTrans+"");
-                params.put("iddtrans", idDTrans+"");
 
                 return params;
             }

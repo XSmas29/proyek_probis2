@@ -157,7 +157,7 @@ public class CustomerDetailProduct extends AppCompatActivity {
                                                         db.cartDao().updateCart(productCart);
                                                     }else{
                                                         //System.out.println("gk ada");
-                                                        cCart cart = new cCart(idProduct, username, jumlah, product.getHarga());
+                                                        cCart cart = new cCart(idProduct, username, jumlah, product.getHarga(), product.getFk_seller());
                                                         db.cartDao().insertCart(cart);
                                                     }
 
