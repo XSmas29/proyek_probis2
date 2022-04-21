@@ -395,7 +395,7 @@ public class RecyclerAdapterDetailPurchase extends RecyclerView.Adapter<Recycler
 
         String awal = String.valueOf(money);
         String temp = ""; // penampung sementara untuk dalam for
-        System.out.println(awal.length());
+//        System.out.println(awal.length());
         for (int i = awal.length(); i > 0 ; i--){
             if (ctr % 3 == 0) {
                 if (i != awal.length()) {

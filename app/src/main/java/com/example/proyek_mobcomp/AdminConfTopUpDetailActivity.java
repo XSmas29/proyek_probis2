@@ -218,7 +218,7 @@ public class AdminConfTopUpDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         String formatted = output.format(d);
-        System.out.println(formatted);
+//        System.out.println(formatted);
 
         binding.textViewTglTopUp.setText("Tanggal Top Up: " + formatted);
 

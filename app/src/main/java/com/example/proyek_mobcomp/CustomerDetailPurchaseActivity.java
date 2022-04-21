@@ -212,7 +212,7 @@ public class CustomerDetailPurchaseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         String formatted = output.format(d);
-        System.out.println(formatted);
+//        System.out.println(formatted);
 
         binding.textViewTanggalTrans.setText(formatted);
 

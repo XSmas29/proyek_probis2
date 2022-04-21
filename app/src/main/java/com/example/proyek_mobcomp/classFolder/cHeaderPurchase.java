@@ -1,6 +1,9 @@
 package com.example.proyek_mobcomp.classFolder;
 
-public class cHeaderPurchase {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class cHeaderPurchase implements Parcelable {
     protected int id;
     protected String fk_customer;
     protected int grandtotal;
@@ -12,6 +15,25 @@ public class cHeaderPurchase {
         this.grandtotal = grandtotal;
         this.tanggal = tanggal;
     }
+
+    protected cHeaderPurchase(Parcel in) {
+        id = in.readInt();
+        fk_customer = in.readString();
+        grandtotal = in.readInt();
+        tanggal = in.readString();
+    }
+
+    public static final Creator<cHeaderPurchase> CREATOR = new Creator<cHeaderPurchase>() {
+        @Override
+        public cHeaderPurchase createFromParcel(Parcel in) {
+            return new cHeaderPurchase(in);
+        }
+
+        @Override
+        public cHeaderPurchase[] newArray(int size) {
+            return new cHeaderPurchase[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -39,7 +61,7 @@ public class cHeaderPurchase {
 
         String awal = String.valueOf(this.grandtotal);
         String temp = ""; // penampung sementara untuk dalam for
-        System.out.println(awal.length());
+//        System.out.println(awal.length());
         for (int i = awal.length(); i > 0 ; i--){
             if (ctr % 3 == 0) {
                 if (i != awal.length()) {
@@ -67,5 +89,18 @@ public class cHeaderPurchase {
 
     public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(fk_customer);
+        dest.writeInt(grandtotal);
+        dest.writeString(tanggal);
     }
 }

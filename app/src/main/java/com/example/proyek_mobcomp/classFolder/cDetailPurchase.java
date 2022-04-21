@@ -101,7 +101,7 @@ public class cDetailPurchase implements Parcelable {
 
         String awal = String.valueOf(this.subtotal);
         String temp = ""; // penampung sementara untuk dalam for
-        System.out.println(awal.length());
+//        System.out.println(awal.length());
         for (int i = awal.length(); i > 0 ; i--){
             if (ctr % 3 == 0) {
                 if (i != awal.length()) {

@@ -174,7 +174,7 @@ public class SellerListBarangFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //System.out.println(response);
+                        System.out.println(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             System.out.println(jsonObject);

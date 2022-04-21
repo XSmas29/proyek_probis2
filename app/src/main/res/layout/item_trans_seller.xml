@@ -38,6 +38,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtSellerBarangLain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="5dp"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -60,6 +68,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/txtSellerTanggal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Tanggal : "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintTop_toBottomOf="@+id/txtSellerIDTransaksi" />
+
+            <TextView
                 android:id="@+id/txtSellerNamaTransaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,17 +91,38 @@
                 app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toBottomOf="@+id/txtSellerIDTransaksi" />
 
-            <TextView
-                android:id="@+id/txtSellerTotalTransaksi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="6dp"
-                android:text="Total : Rp. 0"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/cardView"
-                app:layout_constraintTop_toBottomOf="@+id/txtSellerNamaTransaksi" />
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+                <TextView
+                    android:id="@+id/txtJumlahBarang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Jumlah : 0"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/cardView"
+                    app:layout_constraintTop_toBottomOf="@+id/txtSellerNamaTransaksi" />
+
+                <TextView
+                    android:id="@+id/txtSellerTotalTransaksi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Total : Rp. 0"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/cardView"
+                    app:layout_constraintTop_toBottomOf="@+id/txtSellerNamaTransaksi" />
+
+<!--            </LinearLayout>-->
 
             <TextView
                 android:id="@+id/txtSellerStatusTransaksi"
@@ -97,6 +138,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtSellerTotalTransaksi" />
         </LinearLayout>
     </LinearLayout>
+
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

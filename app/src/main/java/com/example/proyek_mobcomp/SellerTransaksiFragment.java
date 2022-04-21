@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.proyek_mobcomp.classFolder.cDetailPurchase;
+import com.example.proyek_mobcomp.classFolder.cHeaderPurchase;
 import com.example.proyek_mobcomp.classFolder.cKategori;
 import com.example.proyek_mobcomp.classFolder.cProduct;
 import com.example.proyek_mobcomp.databinding.FragmentCustomerHomeBinding;
@@ -42,6 +43,7 @@ import java.util.Map;
 
     Update Change =
     - 17 Maret 2022 : Sudah bisa menampilkan sesuai username seller
+    - 18 April 2022 : Berubah dari yg menampilkan per barang (dtrans) menjadi per transaksi (htrans)
 
  */
 
@@ -50,6 +52,7 @@ public class SellerTransaksiFragment extends Fragment {
     FragmentSellerTransaksiBinding binding;
     ArrayList<cDetailPurchase> listTrans = new ArrayList<>();
     ArrayList<cProduct> listBarangTrans = new ArrayList<>();
+    ArrayList<cHeaderPurchase> listHTrans = new ArrayList<>();
 
     RecyclerAdapterSellerTransaksi recyclerAdapterSellerTransaksi;
 
@@ -92,6 +95,7 @@ public class SellerTransaksiFragment extends Fragment {
     }
 
     public void loadHistory() {
+        binding.progressBar.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 getResources().getString(R.string.url) + "/seller/gettransaksi",
@@ -102,6 +106,7 @@ public class SellerTransaksiFragment extends Fragment {
                         try {
                             listBarangTrans = new ArrayList<>();
                             listTrans = new ArrayList<>();
+                            listHTrans = new ArrayList<>();
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray arraytrans = jsonObject.getJSONArray("datatrans");
 
@@ -134,6 +139,23 @@ public class SellerTransaksiFragment extends Fragment {
 
                                 listBarangTrans.add(new cProduct(idbarang, fk_sellerbarang, fk_kategori, nama, desc, harga, stok, gambar, is_deleted));
                             }
+
+                            JSONArray arrayhtrans = jsonObject.getJSONArray("datahtrans");
+
+                            for (int i = 0; i < arrayhtrans.length(); i++) {
+                                /*
+                                    ditambahkan pada tanggal : 18 April
+
+                                 */
+                                int id = arrayhtrans.getJSONObject(i).getInt("id");
+                                String fk_customer = arrayhtrans.getJSONObject(i).getString("fk_customer");
+                                int grandtotal = arrayhtrans.getJSONObject(i).getInt("grandtotal");
+                                String tanggal = arrayhtrans.getJSONObject(i).getString("tanggal");
+
+                                listHTrans.add(new cHeaderPurchase(id, fk_customer, grandtotal, tanggal));
+                            }
+
+//                            System.out.println("index " + listBarangTrans.size() + "  " + listTrans.size() + "  " + listHTrans.size() + "  ");
                             SetupRvTrans();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -164,16 +186,19 @@ public class SellerTransaksiFragment extends Fragment {
     private void SetupRvTrans() {
         binding.rvTrans.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvTrans.setHasFixedSize(true);
-        recyclerAdapterSellerTransaksi = new RecyclerAdapterSellerTransaksi(listTrans, listBarangTrans);
+        recyclerAdapterSellerTransaksi = new RecyclerAdapterSellerTransaksi(listTrans, listBarangTrans, listHTrans);
         recyclerAdapterSellerTransaksi.setOnItemClickCallback(new RecyclerAdapterSellerTransaksi.OnItemClickCallback() {
             @Override
-            public void onItemClicked(cProduct produk, cDetailPurchase detail) {
+            public void onItemClicked(cHeaderPurchase header, ArrayList<cProduct> produk, ArrayList<cDetailPurchase> detail) {
                 Intent i = new Intent(getActivity(), SellerDetailTransaksiActivity.class);
-                i.putExtra("detail", detail);
-                i.putExtra("produk", produk);
+                i.putExtra("header", header);
+                i.putParcelableArrayListExtra("detail", detail);
+                i.putParcelableArrayListExtra("produk", produk);
                 getActivity().startActivityForResult(i, 200);
+                //Toast.makeText(getContext(), "index "+detail.size() + "  " + produk.size(), Toast.LENGTH_SHORT).show();
             }
         });
         binding.rvTrans.setAdapter(recyclerAdapterSellerTransaksi);
+        binding.progressBar.setVisibility(View.INVISIBLE);
     }
 }

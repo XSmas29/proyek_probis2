@@ -192,7 +192,7 @@ public class CustomerCartFragment extends Fragment {
     }
 
     public void setTotal(){
-        System.out.println("masuk set total");
+//        System.out.println("masuk set total");
         binding.btnCheckout.setText("Checkout Rp " + total);
         binding.btnCheckout.setEnabled(true);
         if (total == 0){

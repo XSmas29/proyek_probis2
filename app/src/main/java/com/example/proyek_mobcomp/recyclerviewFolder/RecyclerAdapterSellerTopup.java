@@ -84,7 +84,7 @@ public class RecyclerAdapterSellerTopup extends RecyclerView.Adapter<RecyclerAda
                 e.printStackTrace();
             }
             String formatted = output.format(d);
-            System.out.println(formatted);
+//            System.out.println(formatted);
 
             txtTanggal.setText("Tanggal : " + formatted);
             txtJumlah.setText("Jumlah : Rp. " + topup.getJumlahInString());
