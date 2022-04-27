@@ -67,6 +67,15 @@ public class SellerDashboardFragment extends Fragment {
                 showPopUp(v);
             }
         });
+
+        binding.btnSellerPendapatan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), SellerPendapatanActivity.class);
+                getActivity().startActivityForResult(i, 300);
+            }
+        });
+
         getData();
         return binding.getRoot();
     }
