@@ -49,7 +49,6 @@ public class AdminConfWithdrawDetailActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.btnCancel.setBackgroundColor(getResources().getColor(R.color.grey));
-        binding.btnReject.setBackgroundColor(getResources().getColor(R.color.red));
 
         idwithdraw = getIntent().getIntExtra("idwithdraw", -1);
 
@@ -62,13 +61,6 @@ public class AdminConfWithdrawDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-
-        binding.btnReject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                statusTopUpChange(-1);
             }
         });
 
@@ -128,7 +120,6 @@ public class AdminConfWithdrawDetailActivity extends AppCompatActivity {
 
     public void getTopUpData() {
         binding.progressBar.setVisibility(View.VISIBLE);
-        binding.btnReject.setEnabled(false);
         binding.btnKonfirmasi.setEnabled(false);
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
@@ -225,7 +216,6 @@ public class AdminConfWithdrawDetailActivity extends AppCompatActivity {
 
 
         binding.progressBar.setVisibility(View.INVISIBLE);
-        binding.btnReject.setEnabled(true);
         binding.btnKonfirmasi.setEnabled(true);
     }
 }

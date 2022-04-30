@@ -154,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                                 editor.commit();
                             }
 
-
                             if (code == 1){ // customer
                                 Intent i = new Intent(MainActivity.this, CustomerHomeActivity.class);
                                 i.putExtra("login", txtUsername);

@@ -164,6 +164,10 @@ public class SellerDashboardFragment extends Fragment {
                     editor.commit();
                     getActivity().finish();
                 }
+                else if(item.getItemId() == R.id.mutasi_saldo){
+                    Intent i = new Intent(getActivity(), SellerMutasiSaldoActivity.class);
+                    startActivity(i);
+                }
                 else if(item.getItemId() == R.id.profile){
                     Intent i = new Intent(getActivity(), SellerProfileActivity.class);
                     startActivity(i);

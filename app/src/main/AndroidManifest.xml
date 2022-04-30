@@ -16,7 +16,13 @@
         android:theme="@style/Theme.Proyek_Mobcomp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SellerMutasiSaldoActivity"
+            android:exported="false" />
+        <activity
             android:name=".SellerPendapatanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerMutasiSaldoActivity"
             android:exported="false" />
         <activity
             android:name=".AdminConfWithdrawDetailActivity"

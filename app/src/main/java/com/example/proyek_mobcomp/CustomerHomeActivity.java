@@ -84,6 +84,9 @@ public class CustomerHomeActivity extends AppCompatActivity {
                 }else if(item.getItemId() == R.id.topup_saldo){
                     Intent i = new Intent(CustomerHomeActivity.this, CustomerTopUpSaldoActivity.class);
                     startActivity(i);
+                }else if(item.getItemId() == R.id.mutasi_saldo){
+                    Intent i = new Intent(CustomerHomeActivity.this, CustomerMutasiSaldoActivity.class);
+                    startActivity(i);
                 }else if(item.getItemId() == R.id.logout){
                     SharedPreferences sharedpreferences = getSharedPreferences("data", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedpreferences.edit();

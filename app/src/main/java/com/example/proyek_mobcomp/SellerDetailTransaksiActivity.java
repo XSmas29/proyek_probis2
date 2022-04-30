@@ -96,14 +96,14 @@ public class SellerDetailTransaksiActivity extends AppCompatActivity {
         binding.btnSellerRejectTransaksi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                updateTransaksi("rejected");
+                updateTransaksi("rejected");
             }
         });
 
         binding.btnSellerAcceptTransaksi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                updateTransaksi("processing");
+                updateTransaksi("processing");
             }
         });
 
