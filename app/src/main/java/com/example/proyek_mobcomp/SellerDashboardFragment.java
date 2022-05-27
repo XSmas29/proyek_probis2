@@ -171,6 +171,9 @@ public class SellerDashboardFragment extends Fragment {
                 else if(item.getItemId() == R.id.profile){
                     Intent i = new Intent(getActivity(), SellerProfileActivity.class);
                     startActivity(i);
+                }else if (item.getItemId() == R.id.item_game_paling_laku){
+                    Intent i = new Intent(getActivity(), SellerKategoriPalingLakuActivity.class);
+                    startActivity(i);
                 }
                 return true;
             }
