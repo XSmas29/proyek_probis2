@@ -66,7 +66,7 @@ public class CustomerTopUpSaldoActivity extends AppCompatActivity {
     /*
 
         Update changes :
-        - 22 Mei 2022 : menambah download report
+        - 22 Mei 2022 : menambah download report. https://www.geeksforgeeks.org/how-to-generate-a-pdf-file-in-android-app/
 
      */
 
@@ -390,7 +390,7 @@ public class CustomerTopUpSaldoActivity extends AppCompatActivity {
             // in which we will be passing our pageWidth,
             // pageHeight and number of pages and after that
             // we are calling it to create our PDF.
-            PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 2).create();
+            PdfDocument.PageInfo mypageInfo = new PdfDocument.PageInfo.Builder(pagewidth, pageHeight, 1).create();
 
             // below line is used for setting
             // start page for our PDF file.
@@ -464,14 +464,15 @@ public class CustomerTopUpSaldoActivity extends AppCompatActivity {
 //            canvas.drawText("This is sample document which we have created.", 396, 560, title);
 
             // header table
-            canvas.drawLine(50, 200, 742, 200, paint);
+            canvas.drawLine(52, 200, 740, 200, paint);
             canvas.drawText("No. ", 78, 219, title);
             canvas.drawText("TopUp ID ", 150, 219, title);
             canvas.drawText("Tanggal ", 270, 219, title);
             canvas.drawText("Jumlah ", 460, 219, title);
             canvas.drawText("Status ", 620, 219, title);
-            canvas.drawLine(50, 230, 742, 230, paint);
+            canvas.drawLine(52, 230, 740, 230, paint);
 
+            // content table
             for (int j = idxArrWritten; j < arrTopUp.size();j++){
                 title.setColor(ContextCompat.getColor(this, R.color.black));
 
@@ -511,6 +512,10 @@ public class CustomerTopUpSaldoActivity extends AppCompatActivity {
                 idxNumber++;
             }
 
+            // nomor halaman / page numbering
+            title.setColor(ContextCompat.getColor(this, R.color.black));
+            title.setTextSize(12);
+            canvas.drawText(  pageNumber + "", 705, 1050, title);
 
 
 
@@ -526,7 +531,7 @@ public class CustomerTopUpSaldoActivity extends AppCompatActivity {
         SimpleDateFormat output = new SimpleDateFormat("dd MMMM yyyy");
 
         Calendar calendar = Calendar.getInstance();
-        
+
         String formatted = output.format(calendar.getTime());
         File file = new File(Environment.getExternalStorageDirectory(), "Laporan Top Up - " + formatted+".pdf");
 

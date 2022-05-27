@@ -32,12 +32,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="History Pencairan Saldo"
+        android:text="History \n Pencairan Saldo"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnCairkanSaldo" />
+
+    <Button
+        android:id="@+id/btnDownloadWithdrawReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="download"
+        android:textSize="8sp"
+        app:layout_constraintTop_toBottomOf="@id/btnCairkanSaldo"
+        app:layout_constraintBottom_toTopOf="@id/rvHistorySaldo"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
         android:id="@+id/edCairkanSaldo"

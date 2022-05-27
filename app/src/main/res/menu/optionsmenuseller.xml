@@ -9,6 +9,9 @@
         android:id="@+id/mutasi_saldo"
         android:title="Mutasi Saldo" />
     <item
+        android:id="@+id/item_game_paling_laku"
+        android:title="Kategori Paling Laku" />
+    <item
         android:title="Logout"
         android:id="@+id/logout"
         app:showAsAction="never"/>

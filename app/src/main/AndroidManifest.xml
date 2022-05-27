@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Proyek_Mobcomp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SellerKategoriPalingLakuActivity"
+            android:exported="false" />
+        <activity
             android:name=".SellerMutasiSaldoActivity"
             android:exported="false" />
         <activity
