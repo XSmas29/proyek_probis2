@@ -175,6 +175,11 @@ public class SellerDashboardFragment extends Fragment {
                     Intent i = new Intent(getActivity(), SellerKategoriPalingLakuActivity.class);
                     startActivity(i);
                 }
+                else if (item.getItemId() == R.id.barang_paling_laku){
+                    Intent i = new Intent(getActivity(), SellerBarangPalingLakuActivity.class);
+                    startActivity(i);
+                }
+
                 return true;
             }
         });
