@@ -184,9 +184,9 @@ public class SellerPendapatanActivity extends AppCompatActivity {
                 output = new SimpleDateFormat("dd MMMM yyyy");
 
                 canvas.drawText(idxNumber + "", 100, 219 + (50 * (j+1)), title);
-                canvas.drawText("#" + listHTrans.get(j).getId(), 200, 219 + (50 * (j+1)), title);
-                canvas.drawText(listHTrans.get(j).getTanggal()+"", 375, 219 + (50 * (j+1)), title);
-                canvas.drawText("Rp " + listHTrans.get(j).getGrandtotalInString(), 575, 219 + (50 * (j+1)), title);
+                canvas.drawText("#" + listHTrans.get((i * 15) + j).getId(), 200, 219 + (50 * (j+1)), title);
+                canvas.drawText(listHTrans.get((i * 15) + j).getTanggal()+"", 375, 219 + (50 * (j+1)), title);
+                canvas.drawText("Rp " + listHTrans.get((i * 15) + j).getGrandtotalInString(), 575, 219 + (50 * (j+1)), title);
 
                 idxArrWritten++;
                 idxNumber++;

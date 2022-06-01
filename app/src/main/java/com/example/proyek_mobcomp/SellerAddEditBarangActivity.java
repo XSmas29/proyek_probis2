@@ -78,8 +78,6 @@ public class SellerAddEditBarangActivity extends AppCompatActivity {
                             System.out.println("gagal");
                         }
                     });
-
-
         }
         getkategori();
         setContentView(binding.getRoot());
