@@ -284,7 +284,7 @@ public class SellerSaldoFragment extends Fragment {
         PdfDocument pdfDocument = new PdfDocument();
 
         // berapa banyak page yg akan dicetak berdasarkan isi
-        int pageNumber = (int) Math.ceil(15 / listTopup.size() );
+        int pageNumber = (int) Math.ceil( listTopup.size() / 15.0);
         int idxArrWritten = 0;
         int idxNumber = 1;
 
@@ -383,48 +383,50 @@ public class SellerSaldoFragment extends Fragment {
 
             // content table
             for (int j = idxArrWritten; j < listTopup.size();j++){
+
                 title.setColor(ContextCompat.getColor(getContext(), R.color.black));
 
                 input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                 output = new SimpleDateFormat("dd MMMM yyyy");
 
                 d = null;
-                try
-                {
+                try {
                     d = input.parse(listTopup.get(j).getCreated());
-                }
-                catch (ParseException e)
-                {
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 formatted = output.format(d);
 
 
-                canvas.drawText(idxNumber + "", 78, 219 + (50 * (j+1)), title);
-                canvas.drawText(listTopup.get(j).getId()+"", 150, 219 + (50 * (j+1)), title);
-                canvas.drawText(formatted+"", 270, 219 + (50 * (j+1)), title);
-                canvas.drawText("Rp " + listTopup.get(j).getJumlahInString(), 460, 219 + (50 * (j+1)), title);
+                canvas.drawText(idxNumber + "", 78, 219 + (50 * ((j % 15) + 1)), title);
+                canvas.drawText(listTopup.get(j).getId() + "", 150, 219 + (50 * ((j % 15) + 1)), title);
+                canvas.drawText(formatted + "", 270, 219 + (50 * ((j % 15) + 1)), title);
+                canvas.drawText("Rp " + listTopup.get(j).getJumlahInString(), 460, 219 + (50 * ((j % 15) + 1)), title);
 
-                if (listTopup.get(j).getStatus() == 0){
+                if (listTopup.get(j).getStatus() == 0) {
                     title.setColor(ContextCompat.getColor(getContext(), R.color.yellow));
-                    canvas.drawText("Pending ", 620, 219 + (50 * (j+1)), title);
-                }
-                else if (listTopup.get(j).getStatus() == 1){
+                    canvas.drawText("Pending ", 620, 219 + (50 * ((j % 15) + 1)), title);
+                } else if (listTopup.get(j).getStatus() == 1) {
                     title.setColor(ContextCompat.getColor(getContext(), R.color.green));
-                    canvas.drawText("Success ", 620, 219 + (50 * (j+1)), title);
-                }else if (listTopup.get(j).getStatus() == -1){
+                    canvas.drawText("Success ", 620, 219 + (50 * ((j % 15) + 1)), title);
+                } else if (listTopup.get(j).getStatus() == -1) {
                     title.setColor(ContextCompat.getColor(getContext(), R.color.red));
-                    canvas.drawText("Rejected ", 620, 219 + (50 * (j+1)), title);
+                    canvas.drawText("Rejected ", 620, 219 + (50 * ((j % 15) + 1)), title);
                 }
 
                 idxArrWritten++;
                 idxNumber++;
+
+                if (idxArrWritten % 15 == 0){
+                    break;
+                }
+
             }
 
             // nomor halaman / page numbering
             title.setColor(ContextCompat.getColor(getContext(), R.color.black));
             title.setTextSize(12);
-            canvas.drawText(  pageNumber + "", 705, 1050, title);
+            canvas.drawText(  i+1 + "", 705, 1050, title);
 
 
 

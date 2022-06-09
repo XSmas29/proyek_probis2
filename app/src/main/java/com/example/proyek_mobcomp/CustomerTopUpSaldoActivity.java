@@ -375,7 +375,7 @@ public class CustomerTopUpSaldoActivity extends AppCompatActivity {
         PdfDocument pdfDocument = new PdfDocument();
 
         // berapa banyak page yg akan dicetak berdasarkan isi
-        int pageNumber = (int) Math.ceil(15 / arrTopUp.size() );
+        int pageNumber = (int) Math.ceil(arrTopUp.size() / 15.0);
         int idxArrWritten = 0;
         int idxNumber = 1;
 
@@ -491,31 +491,35 @@ public class CustomerTopUpSaldoActivity extends AppCompatActivity {
                 formatted = output.format(d);
 
 
-                canvas.drawText(idxNumber + "", 78, 219 + (50 * (j+1)), title);
-                canvas.drawText(arrTopUp.get(j).getId()+"", 150, 219 + (50 * (j+1)), title);
-                canvas.drawText(formatted+"", 270, 219 + (50 * (j+1)), title);
-                canvas.drawText("Rp " + arrTopUp.get(j).getJumlahInString(), 460, 219 + (50 * (j+1)), title);
+                canvas.drawText(idxNumber + "", 78, 219 + (50 * ((j % 15)+1)), title);
+                canvas.drawText(arrTopUp.get(j).getId()+"", 150, 219 + (50 * ((j % 15)+1)), title);
+                canvas.drawText(formatted+"", 270, 219 + (50 * ((j % 15)+1)), title);
+                canvas.drawText("Rp " + arrTopUp.get(j).getJumlahInString(), 460, 219 + (50 * ((j % 15)+1)), title);
 
                 if (arrTopUp.get(j).getStatus() == 0){
                     title.setColor(ContextCompat.getColor(this, R.color.yellow));
-                    canvas.drawText("Pending ", 620, 219 + (50 * (j+1)), title);
+                    canvas.drawText("Pending ", 620, 219 + (50 * ((j % 15)+1)), title);
                 }
                 else if (arrTopUp.get(j).getStatus() == 1){
                     title.setColor(ContextCompat.getColor(this, R.color.green));
-                    canvas.drawText("Success ", 620, 219 + (50 * (j+1)), title);
+                    canvas.drawText("Success ", 620, 219 + (50 * ((j % 15)+1)), title);
                 }else if (arrTopUp.get(j).getStatus() == -1){
                     title.setColor(ContextCompat.getColor(this, R.color.red));
-                    canvas.drawText("Rejected ", 620, 219 + (50 * (j+1)), title);
+                    canvas.drawText("Rejected ", 620, 219 + (50 * ((j % 15)+1)), title);
                 }
 
                 idxArrWritten++;
                 idxNumber++;
+
+                if (idxArrWritten % 15 == 0){
+                    break;
+                }
             }
 
             // nomor halaman / page numbering
             title.setColor(ContextCompat.getColor(this, R.color.black));
             title.setTextSize(12);
-            canvas.drawText(  pageNumber + "", 705, 1050, title);
+            canvas.drawText(  i+1 + "", 705, 1050, title);
 
 
 

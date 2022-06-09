@@ -65,11 +65,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView_0"
                 app:layout_constraintEnd_toEndOf="parent">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_KategoriPalingLaku"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"/>
+                    android:layout_height="match_parent"
+                    android:padding="8dp">
+                    <Button
+                        android:id="@+id/btnDownloadKategoriPalingLakuReport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Download"
+                        android:textSize="8sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/recyclerView_KategoriPalingLaku"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_KategoriPalingLaku"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/btnDownloadKategoriPalingLakuReport"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
